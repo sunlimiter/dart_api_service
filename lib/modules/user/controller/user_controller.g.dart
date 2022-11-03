@@ -10,7 +10,7 @@ Router _$UserControllerRouter(UserController service) {
   final router = Router();
   router.add(
     'GET',
-    r'/<id|[0-9]+>',
+    r'/',
     service.index,
   );
   return router;

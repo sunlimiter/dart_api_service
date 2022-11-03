@@ -17,9 +17,9 @@ class UserController {
     required this.log,
   });
 
-  @Route.get('/<id|[0-9]+>')
-  Future<Response> index(Request request, String id) async {
-    log.info('id=>$id');
+  @Route.get('/')
+  Future<Response> index(Request request) async {
+    // log.info('id=>$id');
     return Response.ok('hello world');
   }
 

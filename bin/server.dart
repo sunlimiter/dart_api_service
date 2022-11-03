@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:dart_api_service/config/application_config.dart';
-import 'package:dart_api_service/helps/web_socket/web_socket_session.dart';
+import 'package:dart_api_service/helps/web_socket/websocket_chat.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_router/shelf_router.dart';
@@ -33,14 +33,24 @@ void main(List<String> args) async {
   final router = Router();
   final appConfig = ApplicationConfig();
   await appConfig.loadConfigApplication(router, env: env);
+  final chatWebSocket = WebSocketChat.create();
 
   final handler = const shelf.Pipeline()
       // .addMiddleware(CorsMiddlewares().handler)
       // .addMiddleware(DefaultContentType('application/json;charset=utf-8').handler)
       // .addMiddleware(SecurityMiddleware(getIt.get(), getIt.get()).handler)
-      // .addMiddleware(shelf.logRequests())
+      .addMiddleware(shelf.logRequests())
+      .addMiddleware(chatWebSocket.middleware)
       // .addMiddleware(exceptionHandler(getIt.get()))
       .addHandler(router);
-  var server = await io.serve(handler, ip, port);
-  print('Serving at http://${server.address.host}:${server.port}');
+
+  io
+      .serve(handler, ip, port)
+      .then(
+        (server) =>
+            print('Serving at wss://${server.address.host}:${server.port}'),
+      )
+      .whenComplete(() async => await chatWebSocket.dispose());
+  // var server = await io.serve(handler, ip, port);
+  // print('Serving at http://${server.address.host}:${server.port}');
 }

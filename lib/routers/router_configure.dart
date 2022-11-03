@@ -1,5 +1,4 @@
 import 'package:dart_api_service/modules/user/user_router.dart';
-import 'package:dart_api_service/modules/websocket/ws_router.dart';
 import 'package:dart_api_service/routers/i_router.dart';
 import 'package:shelf_router/shelf_router.dart';
 
@@ -14,7 +13,6 @@ class RouterConfigure {
 
   final List<IRouter> _routers = [
     UserRouter(),
-    WSRouter(),
   ];
 
   void configure() {

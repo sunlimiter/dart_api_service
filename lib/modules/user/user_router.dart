@@ -12,6 +12,6 @@ class UserRouter implements IRouter {
   void configure(Router router) {
     final userController = GetIt.I.get<UserController>();
 
-    router.get('/api/user', userController.router);
+    router.mount('/api/user', userController.router);
   }
 }

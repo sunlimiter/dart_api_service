@@ -9,9 +9,8 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import '../logger/i_logger.dart' as _i4;
-import '../modules/user/controller/user_controller.dart' as _i3;
-import '../modules/websocket/controller/ws_controller.dart'
-    as _i5; // ignore_for_file: unnecessary_lambdas
+import '../modules/user/controller/user_controller.dart'
+    as _i3; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -27,6 +26,5 @@ _i1.GetIt $initGetIt(
   );
   gh.factory<_i3.UserController>(
       () => _i3.UserController(log: get<_i4.ILogger>()));
-  gh.factory<_i5.WSController>(() => _i5.WSController(log: get<_i4.ILogger>()));
   return get;
 }
