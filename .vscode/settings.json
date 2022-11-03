@@ -1,3 +1,10 @@
 {
-    "dart.sdkPath": ".fvm/flutter_sdk/bin/cache/dart-sdk/bin/"
+    "dart.sdkPath": ".fvm/flutter_sdk/bin/cache/dart-sdk/bin/",
+    "dart.lineLength": 180,
+    "[dart]": {
+        "editor.rulers": [
+            180
+        ],
+        "editor.wordWrapColumn": 180,
+    }
 }

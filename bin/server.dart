@@ -1,8 +1,12 @@
+// ignore_for_file: unawaited_futures
+
 import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:dart_api_service/config/application_config.dart';
+import 'package:dart_api_service/config/service_locator_config.dart';
 import 'package:dart_api_service/helps/web_socket/websocket_chat.dart';
+import 'package:dart_api_service/logger/i_logger.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_router/shelf_router.dart';
@@ -44,13 +48,11 @@ void main(List<String> args) async {
       // .addMiddleware(exceptionHandler(getIt.get()))
       .addHandler(router);
 
-  io
-      .serve(handler, ip, port)
-      .then(
-        (server) =>
-            print('Serving at wss://${server.address.host}:${server.port}'),
-      )
-      .whenComplete(() async => await chatWebSocket.dispose());
+  io.serve(handler, ip, port).then(
+    (server) {
+      getIt.get<ILogger>().debug('Serving at \nwss://${server.address.host}:${server.port}/ws \nhttp://${server.address.host}:${server.port}');
+    },
+  ).whenComplete(() async => chatWebSocket.dispose());
   // var server = await io.serve(handler, ip, port);
   // print('Serving at http://${server.address.host}:${server.port}');
 }

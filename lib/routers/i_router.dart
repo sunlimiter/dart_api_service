@@ -1,3 +1,5 @@
+// ignore_for_file: one_member_abstracts
+
 import 'package:shelf_router/shelf_router.dart';
 
 ///author: lty
