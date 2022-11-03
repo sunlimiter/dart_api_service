@@ -57,25 +57,7 @@ class _RouterPlusHandler {
   _RouterPlusHandler(this.handler);
 
   /// Match the signature of any shelf_router handler.
-  FutureOr<Response> call(
-    Request request, [
-    String? p1,
-    String? p2,
-    String? p3,
-    String? p4,
-    String? p5,
-    String? p6,
-    String? p7,
-    String? p8,
-    String? p9,
-    String? p10,
-    String? p11,
-    String? p12,
-    String? p13,
-    String? p14,
-    String? p15,
-    String? p16,
-  ]) async {
+  FutureOr<Response> call(Request request) async {
     return _handler.call(request);
   }
 
