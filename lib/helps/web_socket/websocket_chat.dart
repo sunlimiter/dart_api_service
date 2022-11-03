@@ -21,7 +21,7 @@ class WebSocketChat {
   const WebSocketChat._(this._rooms);
 
   factory WebSocketChat.create() {
-    return WebSocketChat._({});
+    return const WebSocketChat._({});
   }
 
   /// returns a websocket middleware
