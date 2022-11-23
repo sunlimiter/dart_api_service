@@ -3,7 +3,8 @@
 * 2、 实现基础rbac权限管理
 * 3、 数据库使用mysql
 * 4、 项目结构
-```aidl
+```
+.
 ├── app_parse
 ├── bin
 ├── db
