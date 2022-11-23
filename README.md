@@ -27,17 +27,17 @@
 ##
 * 1、本地运行
 
-```aidl
+```shell
 #生成相关文件
 dart pub run build_runner build --delete-conflicting-outputs
 ```
-```dart
+```shell
 #默认环境是prod，本地运行记得修改env
 dart  bin/server.dart -p 8080 -env qa
 ```
 * 2、服务器部署
   * 使用docker部署，相关命令
-  ```aidl
+  ```shell
   #同步代码
   git pull
   #构建
