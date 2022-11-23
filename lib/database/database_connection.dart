@@ -16,12 +16,14 @@ class DatabaseConnection implements IDatabaseConnection {
 
   @override
   Future<MySqlConnection> openConnection() async {
-    return MySqlConnection.connect(ConnectionSettings(
-      host: _configuration.host,
-      port: _configuration.port,
-      user: _configuration.user,
-      password: _configuration.password,
-      db: _configuration.databaseName,
-    ));
+    return MySqlConnection.connect(
+      ConnectionSettings(
+        host: _configuration.host,
+        port: _configuration.port,
+        user: _configuration.user,
+        password: _configuration.password,
+        db: _configuration.databaseName,
+      ),
+    );
   }
 }

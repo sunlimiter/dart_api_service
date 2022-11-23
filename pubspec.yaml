@@ -19,6 +19,8 @@ dependencies:
   uuid: ^3.0.6
   mysql1: ^0.19.0
   jaguar_jwt: ^3.0.0
+  json_annotation: ^4.7.0
+  crypto: ^3.0.2
 
 dev_dependencies:
   http: ^0.13.5
@@ -27,3 +29,4 @@ dev_dependencies:
   build_runner: ^2.3.2
   injectable_generator: ^1.5.4
   shelf_router_generator: ^1.0.4
+  json_serializable: ^6.5.4
