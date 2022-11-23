@@ -17,6 +17,8 @@ dependencies:
   logger: ^1.1.0
   yaml: ^3.1.1
   uuid: ^3.0.6
+  mysql1: ^0.19.0
+  jaguar_jwt: ^3.0.0
 
 dev_dependencies:
   http: ^0.13.5

@@ -1,49 +1,70 @@
-A server app built using [Shelf](https://pub.dev/packages/shelf),
-configured to enable running with [Docker](https://www.docker.com/).
-
-This sample code handles HTTP GET requests to `/` and `/echo/<message>`
-
-# Running the sample
-
-## Running with the Dart SDK
-
-You can run the example with the [Dart SDK](https://dart.dev/get-dart)
-like this:
-
+## 前言
+* 1、 基于shelf实现的http service
+* 2、 实现基础rbac权限管理
+* 3、 数据库使用mysql
+* 4、 项目结构
+```aidl
+├── app_parse
+├── bin
+├── db
+├── lib
+│   ├── config
+│   ├── database
+│   ├── entities
+│   ├── exceptions
+│   ├── helpers
+│   ├── logger
+│   ├── middlewares
+│   ├── modules
+│   └── routers
+├── scripts
+├── template
+├── Dockerfile
+├── pubspec.yaml
+└── start-server
 ```
-$ dart run bin/server.dart
-Server listening on port 8080
-```
+##
+* 1、本地运行
 
-And then from a second terminal:
+```aidl
+#生成相关文件
+dart pub run build_runner build --delete-conflicting-outputs
 ```
-$ curl http://0.0.0.0:8080
-Hello, World!
-$ curl http://0.0.0.0:8080/echo/I_love_Dart
-I_love_Dart
+```dart
+#默认环境是prod，本地运行记得修改env
+dart  bin/server.dart -p 8080 -env qa
 ```
+* 2、服务器部署
+  * 使用docker部署，相关命令
+  ```aidl
+  #同步代码
+  git pull
+  #构建
+  docker build -t webapp .
+  #运行
+  docker run -d -p 8080:8080 --name webapp -v /Users/jenkins/zy_app_manager_server:/mnt webapp
+  #停止
+  docker stop webapp
+  #删除
+  docker rm webapp
+  #查看日志
+  docker logs -f webapp
+  #进入容器
+  docker exec -it webapp bash
+  ```
+* 3、环境变量配置,使用yaml文件配置
+  * env.xx.yaml
+  
+* n、路由说明
 
-## Running with Docker
+|url|说明|权限|
+|:----:|:----:|:----:|
+|api/auth/login|登录|all|
+|api/auth/register|注册|all|
+|api/auth/refresh|更新token||
+|api/user|用户信息||
 
-If you have [Docker Desktop](https://www.docker.com/get-started) installed, you
-can build and run with the `docker` command:
+## 参考
 
-```
-$ docker build . -t myserver
-$ docker run -it -p 8080:8080 myserver
-Server listening on port 8080
-```
+- [1] [docker 部署 dart web 项目](https://medium.com/google-cloud/build-slim-docker-images-for-dart-apps-ee98ea1d1cf7)
 
-And then from a second terminal:
-```
-$ curl http://0.0.0.0:8080
-Hello, World!
-$ curl http://0.0.0.0:8080/echo/I_love_Dart
-I_love_Dart
-```
-
-You should see the logging printed in the first terminal:
-```
-2021-05-06T15:47:04.620417  0:00:00.000158 GET     [200] /
-2021-05-06T15:47:08.392928  0:00:00.001216 GET     [200] /echo/I_love_Dart
-```

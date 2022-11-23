@@ -91,7 +91,7 @@ class WebSocketChat {
       print('Error while disposing ChatWebsocket');
       print(e);
     } finally {
-      _rooms.clear();
+      // _rooms.clear();
     }
   }
 }

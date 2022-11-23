@@ -7,6 +7,10 @@ import 'package:dart_api_service/config/application_config.dart';
 import 'package:dart_api_service/config/service_locator_config.dart';
 import 'package:dart_api_service/helps/web_socket/websocket_chat.dart';
 import 'package:dart_api_service/logger/i_logger.dart';
+import 'package:dart_api_service/middlewares/cors/cors_middlewares.dart';
+import 'package:dart_api_service/middlewares/default/default_content_type.dart';
+import 'package:dart_api_service/middlewares/exception/shelf_exception_handler.dart';
+import 'package:dart_api_service/middlewares/security/security_middleware.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_router/shelf_router.dart';
@@ -40,12 +44,12 @@ void main(List<String> args) async {
   final chatWebSocket = WebSocketChat.create();
 
   final handler = const shelf.Pipeline()
-      // .addMiddleware(CorsMiddlewares().handler)
-      // .addMiddleware(DefaultContentType('application/json;charset=utf-8').handler)
-      // .addMiddleware(SecurityMiddleware(getIt.get(), getIt.get()).handler)
+      .addMiddleware(CorsMiddlewares().handler)
+      .addMiddleware(DefaultContentType('application/json;charset=utf-8').handler)
+      .addMiddleware(SecurityMiddleware(getIt.get()).handler)
       .addMiddleware(shelf.logRequests())
       .addMiddleware(chatWebSocket.middleware)
-      // .addMiddleware(exceptionHandler(getIt.get()))
+      .addMiddleware(exceptionHandler(getIt.get()))
       .addHandler(router);
 
   io.serve(handler, ip, port).then(

@@ -29,6 +29,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.9.0"
+  auth_header:
+    dependency: transitive
+    description:
+      name: auth_header
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -232,6 +239,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.3"
+  jaguar_jwt:
+    dependency: "direct main"
+    description:
+      name: jaguar_jwt
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   js:
     dependency: transitive
     description:
@@ -288,6 +302,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.2"
+  mysql1:
+    dependency: "direct main"
+    description:
+      name: mysql1
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.19.2"
   node_preamble:
     dependency: transitive
     description:

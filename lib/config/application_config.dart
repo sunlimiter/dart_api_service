@@ -12,7 +12,7 @@ import 'package:shelf_router/shelf_router.dart';
 ////Description:
 
 class ApplicationConfig {
-  Future<void> loadConfigApplication(Router router, {env}) async {
+  Future<void> loadConfigApplication(Router router, {required String env}) async {
     await _loadEnv(env: env);
     _loadDatabaseConfig();
     _configLogger();
@@ -38,13 +38,11 @@ class ApplicationConfig {
   }
 
   ///日志配置
-  void _configLogger() =>
-      GetIt.I.registerLazySingleton<ILogger>(() => Logger());
+  void _configLogger() => GetIt.I.registerLazySingleton<ILogger>(Logger.new);
 
   ///依赖注入
   void _loadDependecies() => configureDependencies();
 
   ///路由
-  void _loadRoutersConfigure(Router router) =>
-      RouterConfigure(router).configure();
+  void _loadRoutersConfigure(Router router) => RouterConfigure(router).configure();
 }
