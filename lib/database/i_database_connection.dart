@@ -5,5 +5,5 @@ import 'package:mysql1/mysql1.dart';
 ////Description:
 
 abstract class IDatabaseConnection {
-  Future<MySqlConnection> openConnection();
+  Future<T> withConnection<T>(Future<T> Function(MySqlConnection conn) action);
 }
