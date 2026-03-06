@@ -34,7 +34,7 @@ class JwtHelper {
       issuer: accessToken,
       subject: 'RefreshToken',
       expiry: DateTime.now().add(const Duration(days: 20)),
-      notBefore: DateTime.now().add(Duration(hours: 12)),
+      notBefore: DateTime.now().add(const Duration(hours: 12)),
       issuedAt: DateTime.now(),
       otherClaims: <String, dynamic>{},
     );
