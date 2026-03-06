@@ -22,28 +22,27 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<User> getUserInfo(AuthLogin authLogin) async {
-    final conn = await connection.openConnection();
-    try {
-      final result = await conn.query('''
-        select * from userinfo where email = ? and password = ?
-       ''', [authLogin.account, CriptyHelpers.generateSHA256Hash(authLogin.password)]);
+    return await connection.withConnection((conn) async {
+      try {
+        final result = await conn.query('''
+          select * from userinfo where email = ? and password = ?
+         ''', [authLogin.account, CriptyHelpers.generateSHA256Hash(authLogin.password)]);
 
-      if (result.isEmpty) {
-        throw UserNotfoundException();
+        if (result.isEmpty) {
+          throw UserNotfoundException();
+        }
+
+        final fields = result.first.fields;
+        return User(
+          id: fields['id'] as int,
+          name: fields['name'] as String,
+          email: fields['email'] as String,
+          password: fields['password'] as String,
+        );
+      } on MySqlException catch (e) {
+        log.debug(e);
+        throw DatabaseErrorException(message: 'Error al loguear usuario');
       }
-
-      final fields = result.first.fields;
-      return User(
-        id: fields['id'] as int,
-        name: fields['name'] as String,
-        email: fields['email'] as String,
-        password: fields['password'] as String,
-      );
-    } on MySqlConnection catch (e) {
-      log.debug(e);
-      throw DatabaseErrorException(message: 'Error al loguear usuario');
-    } finally {
-      await conn.close();
-    }
+    });
   }
 }

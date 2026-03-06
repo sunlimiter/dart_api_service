@@ -19,6 +19,7 @@ dependencies:
   jaguar_jwt: ^3.0.0
   json_annotation: ^4.7.0
   crypto: ^3.0.2
+  pool: ^1.5.2
 
 dev_dependencies:
   http: ^1.6.0
