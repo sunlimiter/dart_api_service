@@ -16,7 +16,7 @@ class RouterConfigure {
   ];
 
   void configure() {
-    for (var r in _routers) {
+    for (final r in _routers) {
       r.configure(_router);
     }
   }
